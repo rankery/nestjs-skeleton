@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  graphqlapi:
+      image: nestmicroservices/graphqlapi:${TAG:-latest}
+      build:
+          context: ./services/graphqlapi
+          dockerfile: Dockerfile
+      environment:
+          - GRAPHQL_ENV=production
+          - REDIS_HOST=redis
+      ports:
+          - '4200:4200'
+      depends_on:
+          - redis
+
+  catalog:
+    image: nestmicroservices/catalog:${TAG:-latest}
+    build:
+      context: ./services/catalog
+      dockerfile: Dockerfile
+    environment:
+      - REDIS_HOST=redis
+    ports:
+      - "4201:3000"
+    depends_on:
+      - redis
+  redis:
+    image: "bitnami/redis:latest"
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - "6379:6379"
+    volumes:
+      - "redis_data:/bitnami/redis"
+
+volumes:
+  redis_data:
+    driver: local
