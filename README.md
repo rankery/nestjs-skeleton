@@ -35,7 +35,7 @@ $ npm install
 ```
 
 ## Docker
-
+```
 $ docker-compose up --build
 
 ```
