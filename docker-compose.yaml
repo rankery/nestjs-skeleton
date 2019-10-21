@@ -3,6 +3,7 @@ version: "3"
 services:
   graphqlapi:
       image: fan-app/graphqlapi:${TAG:-latest}
+      container_name: graphql
       build:
           context: ./services/graphqlapi
           dockerfile: Dockerfile

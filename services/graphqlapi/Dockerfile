@@ -1,6 +1,6 @@
 #
 # ---- Base Node ----
-FROM node:8-alpine AS base
+FROM node:12.12.0-alpine AS base
 
 RUN apk add --no-cache tini
 
