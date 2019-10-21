@@ -16,7 +16,7 @@ export class CatalogController {
         id: '2',
         name: 'Noob TShirt',
         description: `Boring t-shirt for noobs who don't deserve better`,
-        price: 1100
+        price: 1500
       }
     ];
   }

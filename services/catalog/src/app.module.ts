@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
-import { CatalogController } from './catalog/catalog.controller';
+import { ConfigModule } from './config';
+import { ApiModule } from './api';
 
 @Module({
-  imports: [],
-  controllers: [CatalogController],
+  imports: [
+    ApiModule, ConfigModule
+  ],
+  controllers: [],
   providers: []
 })
-export class AppModule {}
+export class AppModule { }

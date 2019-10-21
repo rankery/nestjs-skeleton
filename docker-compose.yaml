@@ -2,7 +2,7 @@ version: "3"
 
 services:
   graphqlapi:
-      image: nestmicroservices/graphqlapi:${TAG:-latest}
+      image: fan-app/graphqlapi:${TAG:-latest}
       build:
           context: ./services/graphqlapi
           dockerfile: Dockerfile
@@ -15,7 +15,7 @@ services:
           - redis
 
   catalog:
-    image: nestmicroservices/catalog:${TAG:-latest}
+    image: fan-app/catalog:${TAG:-latest}
     build:
       context: ./services/catalog
       dockerfile: Dockerfile

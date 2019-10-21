@@ -20,5 +20,4 @@ export interface CatalogItem {
 export interface IQuery {
     getBrands(): Brand[] | Promise<Brand[]>;
     getCatalogItems(): CatalogItem[] | Promise<CatalogItem[]>;
-    temp__(): boolean | Promise<boolean>;
 }

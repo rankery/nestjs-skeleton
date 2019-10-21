@@ -23,6 +23,7 @@
     "@nestjs/common": "^6.0.2",
     "@nestjs/core": "^6.0.2",
     "@nestjs/microservices": "^6.0.2",
+    "dotenv": "^8.2.0",
     "redis": "^2.8.0",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.2.2"
