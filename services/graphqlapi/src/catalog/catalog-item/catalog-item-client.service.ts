@@ -15,7 +15,7 @@ export class CatalogItemService {
 
   public async getCatalogItems(): Promise<CatalogItem[]> {
     const response = await this.client.send<CatalogItem[]>(
-      { type: 'get-catalog-items' },
+      { cmd: 'get-catalog-items' },
       { someImaginaryParams: 42 }
     );
     return response.toPromise();

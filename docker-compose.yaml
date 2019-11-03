@@ -1,44 +1,50 @@
-version: "3"
+version: "3.3"
 
 services:
   graphqlapi:
-      image: fan-app/graphqlapi:${TAG:-latest}
-      container_name: graphql
-      build:
-          context: ./services/graphqlapi
-          dockerfile: Dockerfile
-      environment:
-          - GRAPHQL_ENV=production
-          - REDIS_HOST=redis
-      ports:
-          - '4200:4200'
-      depends_on:
-          - redis
-
-  catalog:
-    image: fan-app/catalog:${TAG:-latest}
+    image: fan-app/graphqlapi:${TAG:-latest}
+    container_name: graphql
     build:
-      context: ./services/catalog
+      context: ./services/graphqlapi
       dockerfile: Dockerfile
     environment:
+      - GRAPHQL_ENV=production
       - REDIS_HOST=redis
+    ports:
+      - "4200:4200"
+  news:
+    image: fan-app/news:${TAG:-latest}
+    container_name: news
+    build:
+      context: ./services/news
+      dockerfile: Dockerfile
+    env_file: ./services/news/.env
+
     ports:
       - "4201:3000"
     depends_on:
-      - redis
-  redis:
-    image: "bitnami/redis:latest"
-    environment:
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
-      - ALLOW_EMPTY_PASSWORD=yes
-      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
-    labels:
-      kompose.service.type: nodeport
+      - news-db
+  s3:
+    image: fan-app/s3:${TAG:-latest}
+    container_name: s3
+    build:
+      context: ./services/s3
+      dockerfile: Dockerfile
+    env_file: ./services/s3/.env
     ports:
-      - "6379:6379"
-    volumes:
-      - "redis_data:/bitnami/redis"
+      - "4202:3000"
+
+  news-db:
+    image: postgres:12.0
+    container_name: news-db
+    ports:
+      - "6001:5432"
+    env_file: ./services/news/.env
+
+  mqtt-broker:
+    image: eclipse-mosquitto:1.6
+    ports:
+      - "1883:1883"
 
 volumes:
-  redis_data:
-    driver: local
+  rabbitmq_data:
