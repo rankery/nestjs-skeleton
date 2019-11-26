@@ -1,7 +1,7 @@
 {
-  "name": "catalog",
+  "name": "grapqhlapi",
   "version": "0.0.0",
-  "description": "Microservice responsible for managing the catalog",
+  "description": "GraphQL serves as an orchestrator and aggregator of data collection from the various microservices",
   "author": "Jesse Carter",
   "license": "MIT",
   "scripts": {
@@ -23,13 +23,14 @@
     "@nestjs/common": "^6.0.2",
     "@nestjs/core": "^6.0.2",
     "@nestjs/microservices": "^6.0.2",
-    "@nestjs/typeorm": "^6.2.0",
-    "dotenv": "^8.2.0",
-    "pg": "^7.12.1",
+    "@nestjs/platform-fastify": "^6.8.3",
+    "apollo-server-fastify": "^2.9.6",
+    "dotenv": "^7.0.0",
+    "graphql": "^14.0.2",
+    "graphql-tools": "^4.0.4",
     "redis": "^2.8.0",
     "reflect-metadata": "^0.1.12",
-    "rxjs": "^6.2.2",
-    "typeorm": "^0.2.20"
+    "rxjs": "^6.2.2"
   },
   "devDependencies": {
     "@nestjs/testing": "^6.0.2",

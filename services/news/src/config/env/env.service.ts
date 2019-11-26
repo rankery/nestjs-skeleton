@@ -21,4 +21,7 @@ export class EnvService {
     get(key: string): string {
         return this.envConfig[key];
     }
+    isProduction(): boolean {
+        return this.get('MODE') !== 'DEV'
+    }
 }
