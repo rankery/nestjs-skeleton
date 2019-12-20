@@ -12,39 +12,39 @@ services:
       - REDIS_HOST=redis
     ports:
       - "4200:4200"
-  news:
-    image: fan-app/news:${TAG:-latest}
-    container_name: news
-    build:
-      context: ./services/news
-      dockerfile: Dockerfile
-    env_file: ./services/news/.env
 
+  base-knex-redis:
+    image: fan-app/base-knex-redis:${TAG:-latest}
+    container_name: base-knex-redis
+    build:
+      context: ./services/base-knex-redis
+      dockerfile: Dockerfile
+    env_file: ./services/base-knex-redis/.env
     ports:
       - "4201:3000"
     depends_on:
-      - news-db
-  s3:
-    image: fan-app/s3:${TAG:-latest}
-    container_name: s3
-    build:
-      context: ./services/s3
-      dockerfile: Dockerfile
-    env_file: ./services/s3/.env
-    ports:
-      - "4202:3000"
+      - base-knex-redis-db
+      - redis
 
-  news-db:
+  base-knex-redis-db:
     image: postgres:12.0
-    container_name: news-db
+    container_name: base-knex-redis-db
     ports:
       - "6001:5432"
-    env_file: ./services/news/.env
+    environment:
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    env_file: ./services/base-knex-redis/.env
+    volumes:
+      - ./services/base-knex-redis/postgres_data:/var/lib/postgresql/data/pgdata
 
-  mqtt-broker:
-    image: eclipse-mosquitto:1.6
-    ports:
-      - "1883:1883"
+  redis:
+    image: "bitnami/redis:latest"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./services/base-knex-redis/redis.conf:/opt/bitnami/redis/etc/redis.conf
+      - ./services/base-knex-redis/redis_data:/bitnami/redis/data
 
 volumes:
-  rabbitmq_data:
+  base-knex-redis-db:
+  redis:
