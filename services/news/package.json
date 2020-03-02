@@ -20,8 +20,8 @@
     "webpack": "webpack --config webpack.config.js"
   },
   "dependencies": {
-    "@nestjs/common": "^6.0.2",
-    "@nestjs/core": "^6.0.2",
+    "@nestjs/common": "^6.11.6",
+    "@nestjs/core": "^6.11.6",
     "@nestjs/microservices": "^6.0.2",
     "@nestjs/typeorm": "^6.2.0",
     "dotenv": "^8.2.0",
