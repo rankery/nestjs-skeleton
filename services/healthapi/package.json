@@ -20,7 +20,7 @@
     "webpack": "webpack --config webpack.config.js"
   },
   "dependencies": {
-    "@nestjs/common": "^6.0.2",
+    "@nestjs/common": "^7.4.3",
     "@nestjs/core": "^6.0.2",
     "@nestjs/microservices": "^6.0.2",
     "@nestjs/platform-fastify": "^6.8.3",
