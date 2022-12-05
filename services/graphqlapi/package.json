@@ -24,7 +24,7 @@
     "@nestjs/core": "^6.0.2",
     "@nestjs/graphql": "^6.0.2",
     "@nestjs/microservices": "^6.0.2",
-    "@nestjs/platform-express": "^6.0.2",
+    "@nestjs/platform-express": "^8.4.0",
     "@nestjs/platform-fastify": "^6.8.3",
     "apollo-server-fastify": "^2.9.6",
     "dotenv": "^7.0.0",
